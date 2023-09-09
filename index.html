@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Library Setup!</title>
+</head>
+<body>
+    <h1>Namaste From Html</h1>
+    <div id="root">Not Rendered.</div>
+
+    <!-- Include React and ReactDOM from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Your React code goes here -->
+    <script>
+        // Define a simple React component
+        const heading = React.createElement('h1', {}, 'Namaste From React');
+
+        // Create a React root in the 'root' div element
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+
+        // Render the 'heading' component into the 'root' element
+        root.render(heading);
+        
+    </script>
+</body>
+</html>
