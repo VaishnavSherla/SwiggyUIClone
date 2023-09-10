@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { CDN_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
-  const { name, cloudinaryImageId, cuisines, avgRating } = resData?.info;
+  const { id, name, cloudinaryImageId, cuisines, avgRating } = resData?.info;
   const { deliveryTime } = resData?.info?.sla;
 
   return (
@@ -16,6 +17,7 @@ const RestaurantCard = (props) => {
       <h4>Cuisines: {cuisines.join(",")}</h4>
       <h4>Average Rating: {avgRating}</h4>
       <h4>Delivery Time: {deliveryTime} mins</h4>
+      <Link to={"/restaurants/" + id}><h3>View Menu</h3></Link>
     </div>
   );
 };

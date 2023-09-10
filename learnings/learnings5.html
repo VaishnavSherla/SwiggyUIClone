@@ -1,5 +1,75 @@
 Conditional rendering
 Shimmer UI
 
-dont create the usestate inside Conditional and loops statement
+dont create the usestate inside Conditional and loops statement not even in loops
 and also dont use usestate out of functional component
+
+SPA
+Link to
+
+React Router Dom
+createBrowserRouter takes a list of components
+path:,
+element:
+children:
+errorElement:
+
+
+useParams >> returns the js obj for the url which we send 
+
+Outlet >> React Router DOM's  Outlet is a placeholder.
+Used in parent components to render child routes.
+Displays nested route content within the parent route.
+
+<h2>2 types of routing</h2>
+<h1>Client-Side Routing</h1>
+  <ul>
+    <li>
+      <strong>Execution:</strong> In client-side routing, navigation and routing are handled entirely on the client-side using JavaScript. When a user clicks a link or enters a URL, JavaScript manipulates the DOM to display the appropriate content without making a full request to the server.
+    </li>
+    <li>
+      <strong>Advantages:</strong>
+      <ul>
+        <li>Fast and responsive: Since page changes don't require server requests, transitions between pages are often faster.</li>
+        <li>Seamless user experience: Navigation feels more like a native app with smoother transitions.</li>
+        <li>Reduces server load: The server primarily serves data, which can lead to better server performance.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Frameworks:</strong> Commonly used with JavaScript frameworks like React Router, Vue Router, or Angular Router in single-page applications (SPAs).
+    </li>
+    <li>
+      <strong>Examples:</strong>
+      <ul>
+        <li>Changing URLs in a single-page app without refreshing the entire page.</li>
+        <li>Rendering different views/components based on the URL.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h1>Server-Side Routing</h1>
+  <ul>
+    <li>
+      <strong>Execution:</strong> In server-side routing, the server handles navigation and routing. When a user clicks a link or enters a URL, a request is sent to the server, which responds with the appropriate HTML page. Each URL typically corresponds to a specific server route.
+    </li>
+    <li>
+      <strong>Advantages:</strong>
+      <ul>
+        <li>SEO-friendly: Search engines can crawl and index server-rendered content more easily.</li>
+        <li>Simplicity: Easier to set up and works well for traditional multi-page applications.</li>
+        <li>Backwards compatibility: Works even when JavaScript is disabled in the browser.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Frameworks:</strong> Often used with traditional server-side frameworks like Ruby on Rails, Django, or Express.js.
+    </li>
+    <li>
+      <strong>Examples:</strong>
+      <ul>
+        <li>Traditional websites where each URL corresponds to a distinct HTML page.</li>
+        <li>Multi-page applications where user interactions trigger server requests.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>In many modern web applications, a hybrid approach is used, combining both client-side and server-side routing. This approach is sometimes referred to as "isomorphic" or "universal" rendering, where initial content is rendered on the server for SEO and performance benefits, and then client-side routing takes over for a smoother user experience.</p>
