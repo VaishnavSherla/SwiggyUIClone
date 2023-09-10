@@ -1,41 +1,81 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { logo, resObj } from "/components/constants";
 
-// JSX -> React.createElement -> Obj -> HTML(DOM)
-// JSX Expression
-// Fragment > Only one parent for component
-// React Element
-const header = <h1 key="h1">Namaste</h1>
-
-// React Component (Normal js Func > React.createlment > Obj> HtmlDom)
 const HeaderComponent = () => {
-    return <h1 key="h1">Namaste Component</h1>
-}
-
-const HeaderComponent2 = () => (
-    <>
-      {header}
-      {HeaderComponent()}
-      <h1 key="h1">Namaste Component</h1>
-    </>
+  return (
+    <div className="header">
+      <div className="logo">{logo}</div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
   );
+};
 
-//   const HeaderComponent2 = () => {
-//     return (
-//       <>
-//         {header}
-//         {HeaderComponent()}
-//         <h1 key="h1">Namaste Component</h1>
-//       </>
-//     );
-//   }
-  
-  
+// we can use (props) directly rather than {resname, etc} like that
 
-// Create a React root in the 'root' div element
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const RestaurantCard = (props) => {
+  const { resData } = props;
+  const { name, cloudinaryImageId, cuisines, avgRating } = resData?.info;
+  const { deliveryTime } = resData?.info?.sla;
 
-// Render the 'header' component into the 'root' element
-// root.render(container);
-// Rendering header component u can call using normal <hc/> or hc() as its a normal func
-root.render(<HeaderComponent2/>);
+  return (
+    <div className="res-card">
+      <img
+        className="res-logo"
+        alt={`Logo for ${name}`}
+        src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}
+      />
+      <h3>{name}</h3>
+      <h4>Cuisines: {cuisines.join(",")}</h4>
+      <h4>Average Rating: {avgRating}</h4>
+      <h4>Delivery Time: {deliveryTime} mins</h4>
+    </div>
+  );
+};
+
+const SearchComponent = () => {
+  return (
+    <div className="search">
+      <input type="text" placeholder="Search" />
+      <button>Search</button>
+    </div>
+  );
+};
+
+const Body = () => {
+  return (
+    <div className="body">
+      <SearchComponent />
+      <div className="res-container">
+        {
+            resObj.map((restaurant, index) => <RestaurantCard key={restaurant.info.id} resData={restaurant} />)
+        }
+      </div>
+    </div>
+  );
+};
+
+const FooterComponent = () => {
+  return (
+    <div className="footer">
+      Swiggy &copy; {new Date().getFullYear()} All rights reserved.
+    </div>
+  );
+};
+
+const AppLayout = () => (
+  <>
+    {<HeaderComponent />}
+    {<Body />}
+    {<FooterComponent />}
+  </>
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout />);

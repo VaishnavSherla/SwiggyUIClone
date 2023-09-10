@@ -169,6 +169,9 @@
                 <ul>
                     <li>The <code>key</code> property uniquely identifies and differentiates elements in a list or collection. It helps React efficiently update and reconcile the Virtual DOM when elements are added, removed, or reordered in a list.</li>
                     <li>When rendering lists with <code>map()</code> or similar methods, it's good practice to assign a unique and stable <code>key</code> to each item.</li>
+                    <li>Use the unique id, if it doesnt exists then go for index as keys (which is better than without keys)</li>
+                    <li>Index as keys isnt recommended if the order changes or we add item in middle then it re renders whole component </li>
+                    <li>Index as a key is an anti-pattern google it.</li>
                 </ul>
             </li>
             <li><strong><code>id</code> Property:</strong>
