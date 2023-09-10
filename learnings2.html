@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Running Notes</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Running Notes of @akshaymarch7's Session on 01-01-2023</h1>
+
+    <h2>Writing Scripts in package.json</h2>
+    <p>
+        <strong>Q. What converts New Code to Older Code(For older version Browsers)?</strong><br>
+        A: Babel<br>
+        We do not need to write polyfill. Babel does it automatically.
+    </p>
+
+    <p>
+        <strong>npx</strong> - executing commands without downloading packages<br>
+        <strong>npm</strong> - will download required packages
+    </p>
+
+    <p>Note: Parcel will not remove <code>console.log</code> automatically. We need to configure for it. There is a package for it, named 'babel-plugin-transform-remove-console' either from babel website or npmjs website:</p>
+
+    <pre><code>npm install babel-plugin-transform-remove-console --save-dev /-D</code></pre>
+
+    <p>Usage:</p>
+    <ol>
+        <li>via <code>.babelrc</code> (recommended)</li>
+        <li>via CLI</li>
+        <li>via NodeAPI</li>
+    </ol>
+
+    <h2>React-key Reconciliation</h2>
+    <p>
+        When there are siblings in an array, we need to give keys for each sibling.
+    </p>
+    <p>HW: Read about React-key Reconciliation from React Docs.</p>
+
+    <p><code>React.createElement</code> gives us an Object, which is then converted to HTML and put into the DOM.</p>
+    <p>JSX uses <code>React.createElement</code> (behind the scenes), which gives an Object, and then into HTML, and it is put into the DOM.</p>
+    <p>Babel does it. Babel converts JSX. JSX was developed by Facebook.</p>
+    <p>Babel is a must to use JSX.</p>
+
+    <p><strong>Q. Is JSX HTML inside JS?</strong><br>
+        A: JSX is HTML-like syntax, and not HTML inside JS.
+    </p>
+
+    <h2>Babel: Compiler for JS</h2>
+    <p>Read Babel Docs: <a href="https://babeljs.io" target="_blank">babeljs.io</a></p>
+    <p>Play with Babel in its website.</p>
+    <p>Babel comes along with Parcel.</p>
+    <p>Also, go to its GitHub Repo, and read about its algorithms.</p>
+
+    <h2>React Component</h2>
+    <p>2 Types:</p>
+    <ol>
+        <li>Functional Component - NEW</li>
+        <li>Class Based Component - OLD</li>
+    </ol>
+    <p>Functional Component is just a normal function that returns some piece of JSX or a React element or a function.</p>
+    <p>Name of a Component starts with a Capital Letter (not mandatory, but good practice to use).</p>
+    Rendering header component u can call using normal <pre><hc/></pre>or hc() as its a normal func
+    <p>we can use anon func or normal func etc</p>
+    <p>If we have to write multiple lines to be returned in a component, we need to use <code>()</code> and <code>;</code> at the end.</p>
+    
+        <!-- Notes Part 2 -->
+
+        <h2>Notes Part 2</h2>
+
+        <h3>Difference between React Element & React Component</h3>
+        <p>React Element is returning an Object.<br>
+        React Component is a function that returns JSX, or a react element, or a function.</p>
+        <p><strong>Syntax When rendering:</strong><br>
+            For React Element, We use <code>root.render(element_name);</code><br>
+            For React Component, We use Angular brackets: <code>root.render(&lt;ComponentName /&gt;);</code>
+        </p>
+    
+        <p>Any piece of Javascript code can be written within <code>{}</code></p>
+    
+        <h3>XSS - Cross-site Scripting</h3>
+        <p>Cross-site scripting (XSS) is an attack in which an attacker injects malicious executable scripts into the code of a trusted application or website. Attackers often initiate an XSS attack by sending a malicious link to a user and enticing the user to click it.</p>
+        <p>JSX takes care of XSS.</p>
+    
+        <h3>Interview Question: Component Composition</h3>
+        <p><strong>Q:</strong> What is Component Composition?<br>
+        <strong>A:</strong> Component Composition is the practice of writing/passing components inside other components.</p>
+    
+        <h2>Homework</h2>
+        <ol>
+            <li>Read about React-key Reconciliation from React Docs.</li>
+            <li>Do whatever Akshay did in the Session.</li>
+        </ol>
+    
+        <!-- End of Notes Part 2 -->
+        <!-- Notes Part 3 -->
+
+        <h2>React Fiber, Diff, and Reconciliation</h2>
+
+        <p>React Fiber is an internal reimplementation of the React core algorithm designed to improve the performance and responsiveness of React applications.</p>
+    
+        <ol>
+            <li><strong>Fiber Tree:</strong> React Fiber introduces a new data structure called the "Fiber Tree." This tree represents the component hierarchy of your React application.</li>
+            <li><strong>Incremental Rendering:</strong> React Fiber enables incremental rendering by breaking rendering work into smaller units called "fibers." It can pause, resume, or prioritize rendering work, allowing React to work on rendering some parts of the application while yielding to the main JavaScript thread for other tasks.</li>
+            <li><strong>Reconciliation:</strong> React Fiber performs a process known as "reconciliation" to determine the differences between the previous virtual DOM and the current one.</li>
+            <li><strong>Scheduling:</strong> Fiber introduces a scheduler that prioritizes updates based on their priority, ensuring higher-priority updates are processed more quickly.</li>
+            <li><strong>Error Handling:</strong> Fiber improves error handling with Error Boundaries, components that catch and handle errors during rendering.</li>
+            <li><strong>Animation Performance:</strong> React Fiber enhances animation performance by allowing React to pause or delay less critical work for smoother animations and transitions.</li>
+            <li><strong>Support for Web Workers:</strong> React Fiber works well with web workers, allowing rendering work to be offloaded to a separate thread, improving performance.</li>
+            <li><strong>Backwards Compatibility:</strong> React Fiber is backward compatible with existing React code, making it possible to update applications to use React Fiber without significant changes.</li>
+        </ol>
+
+        
+    
+        <p>In essence, React Fiber is a significant overhaul of React's internal workings, introducing concurrency and a more flexible rendering process to improve efficiency and responsiveness.</p>
+        <!-- Notes Part 3 -->
+
+        <h2>Reconciliation in React</h2>
+
+        <p>Reconciliation in React, often referred to as the "diffing algorithm," is responsible for efficiently updating the virtual DOM and the actual DOM when changes occur in a React application. Here's a simplified overview of how it works:</p>
+    
+        <ol>
+            <li><strong>Initial Rendering:</strong> When you initially render a React component, React creates a virtual representation of the component's UI structure, known as the Virtual DOM (VDOM).</li>
+            <li><strong>Reconciliation Trigger:</strong> When the state or props of a component change (due to user interaction, data updates, etc.), React triggers a re-render of the component.</li>
+            <li><strong>Creating a New VDOM Tree:</strong> During a re-render, React generates a new VDOM tree to represent the updated state of the component based on the updated props and state.</li>
+            <li><strong>Diffing Algorithm:</strong> React then employs its reconciliation algorithm, which is a diffing algorithm, to compare the new VDOM tree with the previous one (the one generated during the previous render).</li>
+            <li><strong>Finding Differences:</strong> During the diffing process, React identifies differences (or changes) between the old and new VDOM trees. It compares elements, attributes, and their positions in the tree to determine what has changed.</li>
+            <li><strong>Updating the Virtual DOM:</strong> React updates the virtual DOM with the differences it found. This update does not affect the actual DOM yet.</li>
+            <li><strong>Reconciliation of Children:</strong> The diffing algorithm recursively processes the children of the elements, checking for changes at each level of the component tree. It performs this process efficiently, comparing elements in a hierarchical manner.</li>
+            <li><strong>Generating a List of Operations:</strong> As the reconciliation process proceeds, React generates a list of operations that need to be applied to the actual DOM to bring it in sync with the updated virtual DOM. These operations include adding, updating, or removing elements in the actual DOM.</li>
+            <li><strong>Batching Updates:</strong> React batches multiple updates and DOM changes together for performance reasons. This means that multiple state or prop changes within a single render cycle may be processed together to minimize the number of actual DOM updates.</li>
+            <li><strong>Commit Phase:</strong> Once all the updates have been reconciled in the virtual DOM and the list of operations is ready, React proceeds to the "commit phase." During this phase, it applies the operations to the actual DOM to reflect the changes made in the virtual DOM.</li>
+            <li><strong>Actual DOM Update:</strong> React performs the necessary updates in the actual DOM efficiently, making the minimum number of changes required to bring it in line with the updated virtual DOM.</li>
+            <li><strong>Lifecycle Methods and Effects:</strong> Throughout the reconciliation process, React also invokes component lifecycle methods (e.g., <code>componentDidUpdate</code>) and effects (in functional components) as needed.</li>
+            <li><strong>Rendering Completion:</strong> Once all the updates have been applied, the rendering process is considered complete, and the updated component is ready for user interaction.</li>
+        </ol>
+    
+        <p>This reconciliation process allows React to update the user interface efficiently, only making the necessary changes to the actual DOM. By minimizing unnecessary updates, React ensures that the UI remains responsive and performs well, even in complex applications with frequent state changes.</p>
+    
+        <h2>React State Lifecycle</h2>
+    
+        <p>In React, the state lifecycle refers to the various stages and methods associated with managing and updating the state of a component. Here's an overview of the React state lifecycle:</p>
+    
+        <ol>
+            <li><strong>Initialization:</strong> The state is typically initialized in the constructor of a class-based component or using the <code>useState</code> hook in a functional component.</li>
+            <li><strong>Render:</strong> The component's <code>render</code> method (or functional component body) is called to create the initial UI based on the current state.</li>
+            <li><strong>Updating:</strong> When the component's state changes (e.g., due to user interactions or data updates), React triggers an update to the component.</li>
+            <li><strong>Reconciliation:</strong> React performs the reconciliation process, as described earlier, to update the virtual DOM and actual DOM based on the changes in state.</li>
+            <li><strong>Lifecycle Methods:</strong> During the update process, React invokes specific lifecycle methods:
+                <ul>
+                    <li><code>shouldComponentUpdate</code> (class-based components): Allows you to control whether the component should update based on the new state and props. Return <code>true</code> to update or <code>false</code> to prevent an update.</li>
+                    <li><code>componentDidUpdate</code> (class-based components): Called after an update is committed to the DOM. You can perform side effects or additional updates here.</li>
+                    <li><code>useEffect</code> (functional components): Performs side effects in functional components after rendering. Similar to <code>componentDidUpdate</code> in class-based components.</li>
+                </ul>
+            </li>
+            <li><strong>Completion:</strong> After the reconciliation and lifecycle methods are completed, the updated UI is displayed to the user, and the component remains in a "completed" state until further state changes or interactions occur.</li>
+        </ol>
+    
+        <p>Understanding the React state lifecycle is crucial for managing state changes, optimizing component updates, and handling side effects in your React applications.</p>
+        <h2>Key vs. ID</h2>
+    
+        <p>In React, both the <code>key</code> and <code>id</code> properties serve important roles, but they are used for different purposes.</p>
+    
+        <ol>
+            <li><strong><code>key</code> Property:</strong>
+                <ul>
+                    <li>The <code>key</code> property uniquely identifies and differentiates elements in a list or collection. It helps React efficiently update and reconcile the Virtual DOM when elements are added, removed, or reordered in a list.</li>
+                    <li>When rendering lists with <code>map()</code> or similar methods, it's good practice to assign a unique and stable <code>key</code> to each item.</li>
+                </ul>
+            </li>
+            <li><strong><code>id</code> Property:</strong>
+                <ul>
+                    <li>The <code>id</code> property is a standard HTML attribute used to uniquely identify an HTML element. It's often used for styling or JavaScript interactions.</li>
+                    <li>While working with React, you can use <code>id</code> just like in regular HTML for styling or scripting purposes.</li>
+                </ul>
+            </li>
+        </ol>
+    
+        <p>Summary: <code>key</code> is for efficient rendering and reconciliation of lists, while <code>id</code> is a standard HTML attribute used for styling and scripting.</p>
+    
+        <!-- End of Notes Part 3 -->
+        <h1>Component Composition(Composing Component)</h1>
+        <p>
+            Passing Component inside Component
+            Fragment > Only one parent for component
+        </p>
+
+    </body>
+    </html>
+    
