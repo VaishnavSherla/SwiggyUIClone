@@ -1,0 +1,240 @@
+<html>
+  <body>
+    <h1>Monolithic Architecture</h1>
+    <p>
+      In a monolithic architecture, an application is designed and structured as
+      a single, tightly integrated unit. All components and modules of the
+      application, including the user interface, business logic, and data access
+      layers, are bundled together into a single codebase and run as a single
+      application process. Here are some key characteristics of monolithic
+      architecture:
+    </p>
+    <ol>
+      <li>
+        <strong>Single Codebase:</strong> In a monolith, all code for an
+        application is maintained in a single codebase or repository.
+      </li>
+      <li>
+        <strong>Tight Coupling:</strong> Components within the monolith are
+        tightly coupled, meaning they are interdependent and changes to one part
+        of the application can affect other parts.
+      </li>
+      <li>
+        <strong>Scalability:</strong> Scaling a monolithic application typically
+        involves replicating the entire application stack, which can be
+        inefficient and costly.
+      </li>
+      <li>
+        <strong>Deployment:</strong> Updates and deployments usually involve
+        replacing the entire monolithic application, which can lead to downtime.
+      </li>
+      <li>
+        <strong>Development:</strong> Developing and maintaining a monolithic
+        application can become challenging as it grows in complexity.
+      </li>
+      <li>
+        <strong>Testing:</strong> Testing can be complex, and it may require
+        running the entire application to test individual components.
+      </li>
+    </ol>
+
+    <h1>Microservices Architecture</h1>
+    <p>We have seperation of concern. Single responsibility principle</p>
+    <p>
+      In contrast, microservices architecture breaks down an application into a
+      collection of small, loosely coupled services that communicate with each
+      other through well-defined APIs. Each service is responsible for a
+      specific business capability or function. Here are some key
+      characteristics of microservices architecture:
+    </p>
+
+    <ol>
+      <li>
+        <strong>Service-Based:</strong> The application is decomposed into
+        individual services, each with its own codebase, data store, and
+        deployment process.
+      </li>
+      <li>
+        <strong>Loose Coupling:</strong> Microservices are loosely coupled,
+        which means changes to one service do not necessarily impact other
+        services. This allows for more independent development and scalability.
+      </li>
+      <li>
+        <strong>Scalability:</strong> Services can be scaled independently based
+        on demand, which can lead to more efficient resource utilization.
+      </li>
+      <li>
+        <strong>Deployment:</strong> Each service can be updated and deployed
+        independently, reducing downtime and allowing for continuous deployment
+        practices.
+      </li>
+      <li>
+        <strong>Development:</strong> Development teams can work on individual
+        services, which can lead to faster development cycles and agility.
+      </li>
+      <li>
+        <strong>Testing:</strong> Testing can be more focused on individual
+        services, making it easier to ensure the correctness of each service.
+      </li>
+    </ol>
+
+    <h1>Communication in Monolithic Architecture</h1>
+    <p>
+      In a monolithic architecture, all components of the application run within
+      a single, unified codebase and process. Communication between different
+      parts of the application is typically done through direct function or
+      method calls within the same codebase. Since all components are tightly
+      coupled, they can access each other's functions and data structures
+      directly. In essence, communication is internal and occurs within the
+      monolithic application itself.
+    </p>
+    <p>
+      Advantages of communication in a monolithic architecture include
+      simplicity and low latency since function calls are direct. However, this
+      tight coupling can lead to challenges in maintenance, scalability, and
+      deployment as the application grows.
+    </p>
+
+    <h1>Communication in Microservices Architecture</h1>
+    <p>
+      Microservices architecture is designed to be a collection of independent,
+      loosely coupled services. These services communicate with each other
+      through well-defined APIs and protocols. Here are some common
+      communication mechanisms in microservices architecture:
+    </p>
+    <ul>
+      <li>
+        <strong>HTTP/HTTPS:</strong> RESTful APIs over HTTP or HTTPS are a
+        common choice for communication between microservices. Each microservice
+        exposes a set of endpoints that other services can call to request or
+        send data.
+      </li>
+      <li>
+        <strong>Message Queues:</strong> Message-oriented middleware, such as
+        RabbitMQ or Apache Kafka, can be used to facilitate asynchronous
+        communication between microservices. This allows for decoupled
+        communication and can improve scalability and fault tolerance.
+      </li>
+      <li>
+        <strong>gRPC:</strong> gRPC is a high-performance, open-source framework
+        for remote procedure call (RPC) communication between services. It uses
+        Protocol Buffers (protobufs) for efficient and language-agnostic
+        serialization.
+      </li>
+      <li>
+        <strong>Service Mesh:</strong> Service mesh tools like Istio and Envoy
+        can manage communication between microservices, handling tasks like load
+        balancing, service discovery, and security.
+      </li>
+      <li>
+        <strong>Event Sourcing and Event-driven Architecture:</strong> Some
+        microservices architectures employ event-driven communication, where
+        services emit events when certain actions occur, and other services
+        subscribe to these events to react accordingly.
+      </li>
+      <li>
+        <strong>API Gateways:</strong> An API gateway can sit in front of
+        microservices to manage routing, authentication, and rate limiting for
+        external clients.
+      </li>
+    </ul>
+    <p>
+      Microservices communicate over the network, which introduces latency
+      compared to the direct function calls in a monolithic architecture.
+      However, this decoupled communication enables independent development,
+      scalability, and fault isolation, making it suitable for complex and
+      distributed systems.
+    </p>
+
+    <h1>We have 2 ways to render the data from the api</h1>
+
+    <p>1st Way ->> page loads > make api call > render</p>
+    for 500ms to 1 sec the page is frozen
+    <p>
+      2nd Way ->> page loads > render(shimmer ui > we show the boxes kinda thing
+      so the UX is good) > make api call > re render
+    </p>
+    <p>React is beast at this stuff. for re rendering asap.</p>
+
+    <h1>useEffect Hook > Js Function > Purpose:</h1>
+
+    <h1>useEffect Hook in JavaScript</h1>
+    <p>
+      The `useEffect` hook is a fundamental part of React, a JavaScript library
+      for building user interfaces. It allows you to perform side effects in
+      your functional components. Side effects can include data fetching, DOM
+      manipulation, or any action that needs to occur after the initial render
+      of a component or after a state change.
+    </p>
+
+    <h2>Purpose of the useEffect Hook</h2>
+    <p>
+      The main purpose of the `useEffect` hook is to manage side effects in
+      React components. It is used to handle tasks that cannot be done
+      synchronously during the rendering phase, such as:
+    </p>
+    <ul>
+      <li>Fetching data from an API or server.</li>
+      <li>Subscribing to a data source, like a WebSocket.</li>
+      <li>Modifying the DOM directly.</li>
+      <li>Cleaning up resources when a component unmounts.</li>
+    </ul>
+    <p>
+      By using `useEffect`, you can ensure that these side effects are performed
+      in a controlled and predictable manner, helping to prevent memory leaks
+      and other issues.
+    </p>
+
+    <p>
+      The `useEffect` hook takes two arguments: a function and an optional array
+      of dependencies. The function contains the code that runs as a side
+      effect, and the array of dependencies specifies when the effect should
+      run. If the dependency array is empty, the effect runs after every render.
+      If it contains dependencies, the effect runs only when one of the
+      dependencies has changed.
+    </p>
+
+    <h2>Use of the Dependency Array</h2>
+    <p>One common use of the dependency array is to trigger side effects like making API calls when relevant state changes. Let's see an example:</p>
+
+
+    <p>Here's an example of using `useEffect` to fetch data from an API:</p>
+
+    <pre>
+    <code>
+import React, { useState, useEffect } from 'react';
+
+function MyComponent() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        // Fetch data from an API
+        fetch('https://api.example.com/data')
+            .then(response => response.json())
+            .then(data => setData(data))
+            .catch(error => console.error(error));
+    }, []); 
+    // Empty dependency array, so it runs once after initial render
+    // dependency array is used to to make the api calls as the state changes 
+    console.log('Body renders first  thens useEffect will be called')
+    return (
+        <div>
+            {/* Render data */}
+            {data.map(item => (
+                <p key={item.id}>{item.name}</p>
+            ))}
+        </div>
+    );
+}
+
+export default MyComponent;
+    </code>
+    </pre>
+
+    <p>
+      In this example, the `useEffect` hook is used to fetch data when the
+      component is mounted. The empty dependency array ensures that the effect
+      runs only once after the initial render.
+    </p>
+  </body>
+</html>

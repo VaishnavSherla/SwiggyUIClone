@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import mockData from "../utils/mockData";
 
@@ -6,6 +6,13 @@ const Body = () => {
   // Local state variable and State Update Function with an initial value (e.g., 'mockData')
   const [filteredData, setFilteredData] = useState(mockData);
   const [searchValue, setSearchValue] = useState('');
+
+
+  // useEffect takes 2 arguments one is callback func and dependency array
+  useEffect(() => {
+    console.log('Rendered Ui')
+  }, [])
+
 
   const handleFilterClick = () => {
     // Filter the data and update the state
