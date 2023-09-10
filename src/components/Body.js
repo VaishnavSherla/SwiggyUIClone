@@ -1,44 +1,62 @@
 import React, { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import mockData from "../utils/mockData";
+import { DATA_URL } from "../utils/constants";
+import ShimmerUi from "./ShimmerUi";
 
 const Body = () => {
-  // Local state variable and State Update Function with an initial value (e.g., 'mockData')
-  const [filteredData, setFilteredData] = useState(mockData);
-  const [searchValue, setSearchValue] = useState('');
+  const [resList, setResList] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
-
-  // useEffect takes 2 arguments one is callback func and dependency array
   useEffect(() => {
-    console.log('Rendered Ui')
-  }, [])
+    fetchData();
+  }, []);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(DATA_URL);
+      const jsonData = await response.json();
+      if (
+        jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants?.length > 0
+      ) {
+        const restaurants =
+          jsonData.data.cards[5].card.card.gridElements.infoWithStyle.restaurants;
+        setResList(restaurants);
+        setFiltered(restaurants);
+      } else {
+        setResList(mockData);
+        setFiltered(mockData);
+      }
+    } catch (error) {
+      setResList(mockData);
+      setFiltered(mockData);
+    }
+  };
 
-  const handleFilterClick = () => {
-    // Filter the data and update the state
-    const filteredRestaurants = mockData.filter(
+  const handleSearch = () => {
+    const filteredRestaurants = resList.filter((restaurant) =>
+      restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFiltered(filteredRestaurants);
+  };
+
+  const handleFilterTopRated = () => {
+    const filteredRestaurants = resList.filter(
       (restaurant) => restaurant.info.avgRating > 4
     );
-    setFilteredData(filteredRestaurants);
+    setFiltered(filteredRestaurants);
   };
 
-  const handleShowAllClick = () => {
-    // Show all restaurants by resetting the data
-    setFilteredData(mockData);
+  const resetFilters = () => {
+    setFiltered(resList);
+    setSearchText("");
   };
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
+  if (filtered.length === 0) {
+    return <ShimmerUi />;
   }
-
-  const handleSearchClick = () => {
-  const filteredRestaurants = mockData.filter(
-    (restaurant) =>
-      restaurant.info.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
-  setFilteredData(filteredRestaurants);
-};
-
 
   return (
     <div className="body">
@@ -46,21 +64,21 @@ const Body = () => {
         <input
           type="text"
           placeholder="Search for restaurants"
-          value={searchValue}
-          onChange={handleSearchChange}
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
         />
-        <button onClick={handleSearchClick}>Search</button>
+        <button onClick={handleSearch}>Search</button>
       </div>
       <div className="filter">
-        <button className="filter-btn" onClick={handleFilterClick}>
+        <button className="filter-btn" onClick={handleFilterTopRated}>
           Filter Top Rated
         </button>
-        <button className="filter-btn" onClick={handleShowAllClick}>
-          Show All Restaurants
+        <button className="filter-btn" onClick={resetFilters}>
+          Reset Filters
         </button>
       </div>
       <div className="res-container">
-        {filteredData.map((restaurant, index) => (
+        {filtered.map((restaurant, index) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
