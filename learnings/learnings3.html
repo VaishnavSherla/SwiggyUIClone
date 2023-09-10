@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React One-Way Data Flow</title>
+</head>
+<body>
+    <h1>Named and Default Exports</h1>
+<h1>React One-Way Data Flow</h1>
+<h2>React is beast at re rendering the components</h2>
+<p>React, a popular JavaScript library for building user interfaces, follows a one-way data flow model:</p>
+
+<ul>
+  <li><strong>Data Flow Direction:</strong> Data flows from parent components to child components.</li>
+  <li>we have child to parent also this is known as liftig state up.</li>
+  <li><strong>Parent-Child Relationship:</strong> In React, components are organized hierarchically with parent components containing child components.</li>
+  <li><strong>Data Passing:</strong> Data is passed from parent components to child components as <em>props</em>.</li>
+  <li><strong>Rendering:</strong> Child components use the received data as props to render their part of the UI.</li>
+  <li><strong>Callback Functions:</strong> Child components can send data back to parent components by invoking callback functions passed as props.</li>
+  <li><strong>Local State:</strong> React components can also manage local state using hooks(normal js func) (e.g., <code>useState</code>) or class component state.</li>
+  <li><strong>Reactivity:</strong> Changes to state trigger component re-renders, ensuring that the UI stays in sync with the data.</li>
+  <li><strong>Top-Down Approach:</strong> Data typically flows from higher-level (parent) components to lower-level (child) components in a top-down manner, making data flow predictable and easier to trace.</li>
+</ul>
+
+as soon as the local state var updates React will re render the component
+so that makes the websites faster ( dom manipulation is fast)
+<p>While React primarily follows one-way data flow, it doesn't inherently support two-way data binding like Angular. Developers can achieve similar behavior to two-way data binding for form inputs by manually controlling input values and state updates.</p>
+
+<pre>
+<code>
+&lt;input
+  type="text"
+  value={inputValue}
+  onChange={handleInputChange}
+/&gt;
+</code>
+</pre>
+
+<p>In the above example, the input's value is controlled (read from state) and updated (via the <code>onChange</code> event handler) manually, giving developers control over the data flow.</p>
+
+    <h1>React Working Behind the Scenes</h1>
+    <p>React uses a reconciliation algorithm known as React Fiber.</p>
+    <p>ability to split rendering work into chunks and spread it out over multiple frames</p>
+    
+    <h2>How does it work?</h2>
+    <p>React operates by creating a virtual DOM (not the actual DOM, but a representation of it, in the form of React elements, which are JavaScript objects).</p>
+    
+    <p>For example:</p>
+    <pre><code>console.log(<span>&lt;Body/&gt;</span>)</code></pre>
+
+    <p>React then employs a diffing algorithm to identify differences between the updated or new virtual DOM and the old virtual DOM.</p>
+
+    <p>Finally, it updates the actual DOM accordingly.</p>
+</body>
+</html>
+
