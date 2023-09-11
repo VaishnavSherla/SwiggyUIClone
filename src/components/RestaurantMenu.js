@@ -3,7 +3,6 @@ import ShimmerUi from "./ShimmerUi";
 import { useParams } from "react-router-dom";
 import { MENU_API } from "../utils/constants";
 
-// data.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
 const RestaurantMenu = () => {
   const { resId } = useParams();
   [resInfo, setResInfo] = useState(null);
