@@ -3,11 +3,14 @@ import RestaurantCard from "./RestaurantCard";
 import mockData from "../utils/mockData";
 import { DATA_URL } from "../utils/constants";
 import ShimmerUi from "./ShimmerUi";
+import useOnlineStatus from "../utils/useOnlineStatus" 
 
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const onlineStatus = useOnlineStatus();
+
 
   useEffect(() => {
     fetchData();
@@ -18,11 +21,11 @@ const Body = () => {
       const response = await fetch(DATA_URL);
       const jsonData = await response.json();
       if (
-        jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+        jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants?.length > 0
       ) {
         const restaurants =
-          jsonData.data.cards[5].card.card.gridElements.infoWithStyle.restaurants;
+          jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
         setResList(restaurants);
         setFiltered(restaurants);
       } else {
@@ -54,10 +57,17 @@ const Body = () => {
     setSearchText("");
   };
 
+
   if (filtered.length === 0) {
     return <ShimmerUi />;
   }
 
+  if (onlineStatus === false) {
+    return (
+      <h1>Status: {onlineStatus ? "Online" : "Offline"}</h1>
+    )
+  }
+  
   return (
     <div className="body">
       <div className="search">

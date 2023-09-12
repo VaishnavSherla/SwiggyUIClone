@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lazy Loading and Code Splitting in React</title>
+</head>
+<body>
+
+    <h1>Chunking or Lazy Loading or Dynamic Bundling or Code Splitting or</h1>
+
+const Grocery = lazy(() => (import("./components/Grocery")))
+
+we import it using the above lazy func which is provided by react
+
+we may receive the error
+As the react is fast af.. then milli secs gap for loading the js file for this
+which will make the component of grocery wont be available
+the react trys to load it
+
+to handle that we have suspense component from react.
+
+    <h1>Lazy Loading and Code Splitting in React</h1>
+
+    <h2>Lazy Loading and Code Splitting</h2>
+    <p>
+        Lazy loading and code splitting are techniques used to improve the performance of a React application.
+        They involve splitting the application bundle into smaller chunks, which are loaded on-demand as needed.
+    </p>
+
+    <h2>Loading Delay</h2>
+    <p>
+        When using lazy loading, there might be a slight delay in rendering a component for the first time.
+        This delay occurs as the required chunk(s) need to be fetched from the server.
+        React handles this delay automatically and can display fallback content, such as a loading spinner, during the loading process.
+    </p>
+
+    <h2>Error Handling</h2>
+    <p>
+        Error handling is crucial when dealing with lazy loading and asynchronous component loading.
+        React provides mechanisms for handling loading errors gracefully.
+    </p>
+    <ul>
+        <li>
+            Use the <code>Suspense</code> component to handle the loading of components and provide a fallback during loading.
+        </li>
+        <li>
+            Implement an error boundary, such as <code>ErrorBoundary</code>, to gracefully handle errors that may occur during component loading.
+        </li>
+    </ul>
+
+    <h3>Example Code:</h3>
+    <pre>
+        <code>
+            &lt;Suspense fallback=&lt;div>Loading...&lt;/div>&gt;
+                &lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;
+                    &lt;LazyLoadedComponent /&gt;
+                &lt;/ErrorBoundary&gt;
+            &lt;/Suspense&gt;
+        </code>
+    </pre>
+
+    <p>
+        By combining <code>Suspense</code> and an error boundary, you can ensure a smooth and error-tolerant experience for users when using lazy loading and code splitting in your React application.
+    </p>
+</body>
+</html>

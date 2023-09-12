@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ShimmerUi from "./ShimmerUi";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
-
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  [resInfo, setResInfo] = useState(null);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resId);
-    const json = await data.json();
-    setResInfo(json.data);
-  };
+  const resInfo = useRestaurantMenu(resId)
 
   if (resInfo === null) {
     return <ShimmerUi />;
@@ -34,6 +24,7 @@ const RestaurantMenu = () => {
     costForTwoMessage,
   } = resInfo?.cards[0]?.card?.card?.info;
   let itemCards = [];
+  
   for (let i = 0; i <= resInfo.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.length; i++) {
     const currentCard = resInfo.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[i]?.card?.card;
 
@@ -41,6 +32,7 @@ const RestaurantMenu = () => {
       itemCards = itemCards.concat(currentCard.itemCards);
     }
   }
+  
   return (
     <div className="menu">
       <h1>{name}</h1>
