@@ -3,14 +3,13 @@ import RestaurantCard from "./RestaurantCard";
 import mockData from "../utils/mockData";
 import { DATA_URL } from "../utils/constants";
 import ShimmerUi from "./ShimmerUi";
-import useOnlineStatus from "../utils/useOnlineStatus" 
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
-
 
   useEffect(() => {
     fetchData();
@@ -25,7 +24,8 @@ const Body = () => {
           ?.restaurants?.length > 0
       ) {
         const restaurants =
-          jsonData.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+          jsonData.data.cards[4].card.card.gridElements.infoWithStyle
+            .restaurants;
         setResList(restaurants);
         setFiltered(restaurants);
       } else {
@@ -57,37 +57,48 @@ const Body = () => {
     setSearchText("");
   };
 
-
   if (filtered.length === 0) {
     return <ShimmerUi />;
   }
 
   if (onlineStatus === false) {
-    return (
-      <h1>Status: {onlineStatus ? "Online" : "Offline"}</h1>
-    )
+    return <h1>Status: {onlineStatus ? "Online" : "Offline"}</h1>;
   }
-  
+
   return (
     <div className="body">
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Search for restaurants"
-          value={searchText}
-          onChange={(event) => setSearchText(event.target.value)}
-        />
-        <button onClick={handleSearch}>Search</button>
+      <div className="flex">
+        <div className="search">
+          <input
+            type="text"
+            className="px-4 py-2 m-4 border border-solid rounded-lg border-black font-bold text-slate-600"
+            placeholder="Search"
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+          />
+          <button
+            className="px-4 py-2 bg-green-100 rounded-lg m-4 hover:cursor-pointer hover:bg-green-200 font-bold text-slate-600 hover:text-slate-900"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+        </div>
+        <div className="filter">
+          <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg hover:cursor-pointer hover:bg-green-200 font-bold text-slate-600 hover:text-slate-900"
+            onClick={handleFilterTopRated}
+          >
+            Filter Top Rated
+          </button>
+          <button
+            className="px-4 py-2 bg-green-100 m-4  rounded-lghover:cursor-pointer hover:bg-green-200 font-bold text-slate-600 hover:text-slate-900"
+            onClick={resetFilters}
+          >
+            Reset Filters
+          </button>
+        </div>
       </div>
-      <div className="filter">
-        <button className="filter-btn" onClick={handleFilterTopRated}>
-          Filter Top Rated
-        </button>
-        <button className="filter-btn" onClick={resetFilters}>
-          Reset Filters
-        </button>
-      </div>
-      <div className="res-container">
+      <div className="flex flex-wrap gap-4">
         {filtered.map((restaurant, index) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
