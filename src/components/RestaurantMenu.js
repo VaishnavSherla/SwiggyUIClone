@@ -7,8 +7,6 @@ import RestaurantCategory from "./RestaurantCategory";
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const [showIndex, setShowIndex] = useState(0)
-    
-
   const resInfo = useRestaurantMenu(resId);
 
   if (resInfo === null) {
@@ -48,10 +46,20 @@ const RestaurantMenu = () => {
       </p>
 
       {/* Categories Accordians */}
-
       {categories.map((category, index) => (
+        <RestaurantCategory
+          key={category?.card?.card.id}
+          data={category?.card?.card}
+          showItems={index === showIndex}
+          setShowIndex={setShowIndex}
+          showIndex = {showIndex}
+          index={index}
+        />))}
+
+      {/* {categories.map((category, index) => (
         <RestaurantCategory data={category?.card?.card} showItems={index == showIndex ? true : false} setShowIndex={() => setShowIndex(index)}/>
-      ))}
+      ))} */}
+      
     </div>
   );
 };

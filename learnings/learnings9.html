@@ -1,0 +1,24 @@
+<h1>Props Drilling.. (Problem of passing props)</h1>
+<p>if we want to send props from ancester to children</p>
+<p>
+    so we need its like we need global var
+    where we can change stuff from any component.
+</p>
+
+<h2>so they are react context which are given react.</h2>
+
+<p>createContext()</p>
+
+<p>for same page we can use this useContext(contextName) - React Hook</p>
+
+<p>for different page we need use it as consumer</p>
+<p><userContext.Consumer>{(data) => {console.log(data)}}</userContext.Consumer></p>
+  
+
+<p>how to modify this userContext</p>
+<p>by userContext.provider</p>
+<p>by using the provider </p>
+<p>by setting it through the useEffect then using the provider</p>
+<p>we can provide the context for specifice portion(i mean by using the provider if we set any value )</p>
+
+<p>we can also use the nested contexts</p>
