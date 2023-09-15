@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import mockData from "../utils/mockData";
 import { DATA_URL } from "../utils/constants";
 import ShimmerUi from "./ShimmerUi";
@@ -11,6 +11,8 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
 
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,11 +22,11 @@ const Body = () => {
       const response = await fetch(DATA_URL);
       const jsonData = await response.json();
       if (
-        jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants?.length > 0
       ) {
         const restaurants =
-          jsonData.data.cards[4].card.card.gridElements.infoWithStyle
+          jsonData.data.cards[5].card.card.gridElements.infoWithStyle
             .restaurants;
         setResList(restaurants);
         setFiltered(restaurants);
@@ -100,7 +102,7 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap gap-4">
         {filtered.map((restaurant, index) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          !restaurant.promoted ? <RestaurantCardPromoted key={restaurant.info.id} resData={restaurant}/> : <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
     </div>

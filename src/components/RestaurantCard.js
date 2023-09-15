@@ -52,3 +52,18 @@ const RestaurantCard = (props) => {
 };
 
 export default RestaurantCard;
+
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div className="relative">
+        <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded z-10">
+          Promoted
+        </div>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
+
