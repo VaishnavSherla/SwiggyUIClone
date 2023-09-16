@@ -1,0 +1,71 @@
+<h1>Redux Store - Js Obj - kept in central space - For Managing Data.</h1>
+<h3>install react-redux, also @reduxjs/toolkit</h3>
+<h2>We have Slices in Redux Store So That Store Doesnt Become Clumsy.</h2>
+<p>Its like making logical seperations </p>
+<p>like themes, userinfo, cart slice, etc</p>
+
+<p>we cant directly modify slice, when we click a button like add to cart we need to dispatch an action which calls a func which modifies cart slice</p>
+
+<p>this function is called as reducer.</p>
+
+<p>when we click on a button, which dispatches an action whihc calls a func , which modifies the cart slice (a slice of redux store)</p>
+
+<h1>how to read data from cart slice?</h1>
+<p>for that we use a selecter, which will give the data, for updating component</p>
+<p>phenomenon is known as subscribing to store</p>
+<p>component is subscribed to store(cart)</p>
+
+<p>as its subscribed it will update atomatically.</p>
+
+
+configuing app store
+
+<!-- import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./cartSlice";
+
+const appStore = configureStore({
+    reducer:{
+        cart: cartReducer,
+    }
+});
+
+export default appStore;
+
+
+cart slice
+
+import { createSlice } from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({
+    name: 'cart', 
+    initialState: {
+        items: []
+    },
+    reducers: {
+        addItem: (state, action) => {
+            state.items.push(action.payload)
+        },
+        removeItem: (state) => {
+            state.items.pop()
+        },
+        clearCart: (state) => {
+            state.items.length = 0
+        }
+    }
+});
+
+export const {addItem, removeItem, clearCart} = cartSlice.actions
+export default cartSlice.reducer;
+
+providing the store to app
+<Provider store={appStore}>
+    <>
+        <Header />
+        <Outlet />
+        <Footer />
+      </>
+  </Provider>
+
+subscribing to store..
+const cart = useSelector((store) => store.cart.items)
+ -->

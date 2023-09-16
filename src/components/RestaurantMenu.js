@@ -25,6 +25,7 @@ const RestaurantMenu = () => {
     avgRating,
     costForTwoMessage,
   } = resInfo?.cards[0]?.card?.card?.info;
+  
   let itemCards = [];
 
   console.log(resInfo.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
@@ -48,11 +49,10 @@ const RestaurantMenu = () => {
       {/* Categories Accordians */}
       {categories.map((category, index) => (
         <RestaurantCategory
-          key={category?.card?.card.id}
+        key={`${category?.card?.card.id}-${index}`}
           data={category?.card?.card}
-          showItems={index === showIndex}
+          showItems={index == showIndex}
           setShowIndex={setShowIndex}
-          showIndex = {showIndex}
           index={index}
         />))}
 

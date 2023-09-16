@@ -12,16 +12,27 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 
 // import Grocery from "./components/Grocery";
-
 const Grocery = lazy(() => (import("./components/Grocery")))
 
-const AppLayout = () => (
-  <>
-    <Header />
-    <Outlet />
-    <Footer />
-  </>
-);
+// Provider and appStore..
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+
+import Cart from './components/Cart'
+
+
+const AppLayout = () => {
+
+console.log("Is Provider in this component:", Boolean(Provider));
+
+  return (
+    <Provider store={appStore}>
+        <Header />
+        <Outlet />
+        <Footer />
+   </Provider>
+  )
+}
 
 // createBrowserRouter takes list of paths which has path and element(component)
 const appRouter = createBrowserRouter([
@@ -35,7 +46,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
@@ -43,15 +58,23 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/grocery",
-        element: <Suspense fallback={<h1>Loading..</h1>}><Grocery /></Suspense>,
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/restaurants/:resId",
+        element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,
   },
-  {
-    path:"restaurants/:resId",
-    element: <RestaurantMenu/>
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
